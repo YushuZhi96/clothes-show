@@ -6,6 +6,14 @@ Clothes Show 是一个 iOS 优先的数字衣橱与 AI 穿搭参考图原型。
 
 当前版本是一个静态前端原型，重点验证衣橱管理与导入流程。
 
+## 界面展示
+
+![首页](docs/images/home.png)
+
+![衣橱](docs/images/wardrobe.png)
+
+![衣物详情](docs/images/item-detail.png)
+
 ## 当前功能
 
 - iPhone Pro 风格移动端模拟框。
@@ -58,4 +66,3 @@ http://localhost:5188
 - 将生成器接入衣橱中的真实衣物。
 - 增加人像档案与 AI 穿搭参考图生成。
 - 持久化搜索、筛选、标签和导入记录。
-
