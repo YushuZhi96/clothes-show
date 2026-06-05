@@ -702,6 +702,15 @@ saveImport.addEventListener("click", () => {
 
 renderWardrobe();
 
+const initialView = new URLSearchParams(window.location.search).get("view");
+if (initialView === "wardrobe") {
+  showView("wardrobe");
+}
+
+if (initialView === "item-detail") {
+  openItemDetail(0);
+}
+
 wardrobeGrid.addEventListener("click", (event) => {
   const card = event.target.closest("[data-item-index]");
   if (card) {
