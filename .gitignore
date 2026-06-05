@@ -1,0 +1,16 @@
+.DS_Store
+Thumbs.db
+
+# Local editor state
+.idea/
+.vscode/
+
+# Logs
+*.log
+
+# Dependency folders for future app builds
+node_modules/
+.venv/
+dist/
+build/
+
