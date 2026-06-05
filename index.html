@@ -4,10 +4,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Clothes Show iOS Prototype</title>
-    <link rel="stylesheet" href="styles.css?v=3" />
+    <link rel="stylesheet" href="styles.css?v=10" />
   </head>
-  <body>
-    <main class="stage" aria-label="Clothes Show iOS prototype">
+  <body data-theme="memphis">
+    <a class="skip-link" href="#appContent">跳到主要内容</a>
+    <main class="stage" id="appContent" aria-label="Clothes Show iOS prototype">
       <section class="phone-shell" aria-label="iPhone 17 Pro style mockup">
         <div class="dynamic-island" aria-hidden="true"></div>
         <div class="screen">
@@ -82,6 +83,11 @@
               <h1>我的衣橱</h1>
             </header>
 
+            <div class="wardrobe-toolbar">
+              <button class="tool-button" type="button" id="toggleAdvancedFilters">筛选</button>
+              <button class="tool-button" type="button" id="toggleBulkMode">管理</button>
+            </div>
+
             <div class="search-box">
               <input id="wardrobeSearch" type="search" placeholder="搜索衣服、颜色、场景、标签" aria-label="搜索衣橱" />
               <button id="clearWardrobeSearch" type="button" aria-label="清空搜索">×</button>
@@ -94,6 +100,33 @@
               <button class="chip" type="button" data-wardrobe-filter="鞋包">鞋包</button>
               <button class="chip" type="button" data-wardrobe-filter="配饰">配饰</button>
             </div>
+
+            <section class="advanced-filter-panel" id="advancedFilterPanel" aria-hidden="true">
+              <div class="filter-group">
+                <span>颜色</span>
+                <div class="mini-chip-row" id="colorFilters"></div>
+              </div>
+              <div class="filter-group">
+                <span>季节</span>
+                <div class="mini-chip-row" id="seasonFilters"></div>
+              </div>
+              <div class="filter-group">
+                <span>场景</span>
+                <div class="mini-chip-row" id="sceneFilters"></div>
+              </div>
+              <div class="filter-group">
+                <span>标签</span>
+                <div class="mini-chip-row" id="tagFilters"></div>
+              </div>
+              <button class="clear-filter-button" type="button" id="clearAdvancedFilters">清空筛选</button>
+            </section>
+
+            <section class="bulk-bar" id="bulkBar" aria-hidden="true">
+              <strong id="bulkCount">已选 0 件</strong>
+              <button type="button" id="bulkTag">加标签</button>
+              <button type="button" id="bulkSeason">改季节</button>
+              <button type="button" id="bulkDelete">删除</button>
+            </section>
 
             <div class="wardrobe-grid" id="wardrobeGrid"></div>
             <section class="empty-wardrobe" id="emptyWardrobe" aria-live="polite">
@@ -116,6 +149,58 @@
             </header>
 
             <div class="detail-image-frame" id="detailImage"></div>
+
+            <section class="detail-card">
+              <div class="section-title-row">
+                <h2>基础信息</h2>
+                <button class="text-link" id="itemEditToggle" type="button">编辑</button>
+              </div>
+              <div class="item-info-list" id="itemInfoList"></div>
+              <div class="item-editor" id="itemEditor" aria-hidden="true">
+                <div class="form-grid">
+                  <label class="form-field">
+                    <span>名称</span>
+                    <input id="editItemName" type="text" />
+                  </label>
+                  <label class="form-field">
+                    <span>分类</span>
+                    <select id="editItemCategory">
+                      <option>上衣</option>
+                      <option>下装</option>
+                      <option>外套</option>
+                      <option>鞋包</option>
+                      <option>配饰</option>
+                    </select>
+                  </label>
+                  <label class="form-field">
+                    <span>场景</span>
+                    <select id="editItemScene">
+                      <option>校园</option>
+                      <option>街头</option>
+                      <option>约会</option>
+                      <option>通勤</option>
+                      <option>派对</option>
+                      <option>日常</option>
+                    </select>
+                  </label>
+                  <label class="form-field">
+                    <span>季节</span>
+                    <select id="editItemSeason">
+                      <option>春夏</option>
+                      <option>春秋</option>
+                      <option>夏季</option>
+                      <option>秋冬</option>
+                      <option>四季</option>
+                    </select>
+                  </label>
+                </div>
+                <label class="form-field edit-color-field">
+                  <span>颜色</span>
+                  <select id="editItemColor"></select>
+                </label>
+                <button class="primary-small edit-save-button" type="button" id="saveItemEdit">保存修改</button>
+              </div>
+            </section>
 
             <section class="detail-card">
               <div class="section-title-row">
@@ -254,6 +339,61 @@
               </div>
             </section>
 
+            <section class="accessibility-card">
+              <div class="section-title-row">
+                <div>
+                  <p class="eyebrow">Access</p>
+                  <h2>界面偏好</h2>
+                </div>
+              </div>
+              <div class="theme-option-grid" role="group" aria-label="主题选择">
+                <button class="theme-option selected" type="button" data-theme-option="memphis" aria-pressed="true">
+                  <span>Memphis Play</span>
+                  <strong>玩乐高饱和</strong>
+                </button>
+                <div class="theme-preview memphis-preview" aria-label="Memphis Play 示例">
+                  <div class="preview-closet-card">
+                    <div class="preview-cloth-image">
+                      <img src="assets/clothes/realistic/red-jacket.png" alt="红色短外套示例" />
+                    </div>
+                    <div class="preview-copy">
+                      <strong>红色短外套</strong>
+                      <span>街头 · 春秋</span>
+                    </div>
+                  </div>
+                  <div class="preview-row">
+                    <span class="preview-chip">外套</span>
+                    <span class="preview-chip">复古</span>
+                    <span class="preview-button">编辑</span>
+                  </div>
+                </div>
+                <button class="theme-option" type="button" data-theme-option="accessible" aria-pressed="false">
+                  <span>Access Clear</span>
+                  <strong>高对比稳健</strong>
+                </button>
+                <div class="theme-preview accessible-preview" aria-label="Access Clear 示例">
+                  <div class="preview-closet-card">
+                    <div class="preview-cloth-image">
+                      <img src="assets/clothes/realistic/red-jacket.png" alt="红色短外套示例" />
+                    </div>
+                    <div class="preview-copy">
+                      <strong>红色短外套</strong>
+                      <span>街头 · 春秋</span>
+                    </div>
+                  </div>
+                  <div class="preview-row">
+                    <span class="preview-chip">✓ 外套</span>
+                    <span class="preview-chip">春秋</span>
+                    <span class="preview-button">编辑</span>
+                  </div>
+                </div>
+              </div>
+              <button class="motion-toggle" type="button" id="reduceMotionToggle" aria-pressed="false">
+                <span>减少动态效果</span>
+                <strong>关闭</strong>
+              </button>
+            </section>
+
             <div class="settings-list">
               <button class="setting-row">
                 <span>人像档案</span>
@@ -315,10 +455,35 @@
                   <span>选择照片</span>
                 </span>
               </label>
+              <section class="compare-panel" id="comparePanel" aria-hidden="true">
+                <div class="compare-card">
+                  <span>原图</span>
+                  <div class="compare-image empty" id="beforePreview">Before</div>
+                </div>
+                <div class="compare-card processed">
+                  <span>处理后</span>
+                  <div class="compare-image empty" id="afterPreview">After</div>
+                </div>
+              </section>
               <div class="import-tool-row">
                 <button class="crop-open-button" type="button" id="openCropper" disabled>裁剪照片</button>
                 <button class="white-bg-button" type="button" id="applyWhiteBg" disabled>换白底</button>
               </div>
+
+              <section class="ai-suggestion-card" id="aiSuggestionCard" aria-hidden="true">
+                <div class="suggestion-title-row">
+                  <div>
+                    <p class="eyebrow">AI Check</p>
+                    <h3>识别建议</h3>
+                  </div>
+                  <span class="confidence-pill" id="suggestionConfidence">--</span>
+                </div>
+                <div class="suggestion-result-grid" id="suggestionResults"></div>
+                <div class="suggestion-action-row">
+                  <button class="secondary-button" type="button" id="refreshSuggestion">重新识别</button>
+                  <button class="primary-small" type="button" id="applySuggestion">套用建议</button>
+                </div>
+              </section>
 
               <section class="crop-panel" id="cropPanel" aria-hidden="true">
                 <div class="crop-stage" id="cropStage">
@@ -443,6 +608,6 @@
       </section>
     </main>
 
-    <script src="app.js?v=3"></script>
+    <script src="app.js?v=10"></script>
   </body>
 </html>
