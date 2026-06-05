@@ -6,6 +6,14 @@ Clothes Show is an iOS-first digital wardrobe and AI outfit reference prototype.
 
 The current version is a static frontend prototype focused on validating the wardrobe management and clothing import flow.
 
+## Screenshots
+
+![Home](docs/images/home.png)
+
+![Wardrobe](docs/images/wardrobe.png)
+
+![Item detail](docs/images/item-detail.png)
+
 ## Current Features
 
 - iPhone Pro-style mobile mockup.
@@ -58,4 +66,3 @@ This is not a production iOS app yet. It is a static prototype used to validate 
 - Connect the outfit generator to real wardrobe items.
 - Add portrait profiles and AI outfit reference generation.
 - Persist search, filters, tags, and import records.
-
