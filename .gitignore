@@ -13,4 +13,4 @@ node_modules/
 .venv/
 dist/
 build/
-
+.xcode-derived/
